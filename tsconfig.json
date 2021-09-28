@@ -21,8 +21,9 @@
     "include": [
         "src/**/*", 
         "routes/**/*",
-        "controllers/**/*"
-, "controllers/algo/factorial.ts"    ],
+        "controllers/**/*",
+        "controllers/algo/factorial.ts"    
+    ],
     "exclude": [
         "../node_modules",
         "../*.js"

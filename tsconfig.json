@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "es6",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist",
+      "rootDirs": ["./src", "./routes", "./controllers"],
+      "baseUrl": ".",
+      "paths": {
+        "*": [
+          "*",
+          "src/*",
+          "routes/*"
+        ]
+      },
+      "inlineSources": true
+    },
+    "lib": ["es2015"],
+    "include": [
+        "src/**/*", 
+        "routes/**/*",
+        "controllers/**/*"
+, "controllers/algo/factorial.ts"    ],
+    "exclude": [
+        "../node_modules",
+        "../*.js"
+    ]
+}

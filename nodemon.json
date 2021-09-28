@@ -1,0 +1,7 @@
+{
+    "watch": ["src/", "routes/"],
+    "ext": "js, ts, css, scss",
+    "execMap": {
+        "ts": "ts-node"
+      }
+}

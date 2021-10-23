@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { factorial } from '../../controllers/algo/factorial';
 import { fibo } from '../../controllers/algo/fibonacci';
 import { pascalTriangle } from '../../controllers/algo/pascalTriangle';
+import { isPalindromeNumber } from '../../controllers/algo/palindromeNumber';
 
 export const algoRoute = express();
 
@@ -57,6 +58,21 @@ algoRoute.get('/pascal-triangle/:number', (req: Request, res: Response) => {
 
         const triangles = pascalTriangle(numRows);
         res.json(triangles);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+//palindrom number
+algoRoute.get('/palindrom-number/:number', (req: Request, res: Response) => {
+    try {
+        const num = parseInt(req.params.number);
+        if (!(isInteger(num) && num >= 0)) {
+            res.status(400).send(`${req.params.number} must be non-negative integer`);
+            return;
+        }
+
+        res.send(isPalindromeNumber(num));
     } catch (err) {
         res.status(400).send(err);
     }

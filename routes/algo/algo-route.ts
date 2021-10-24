@@ -3,6 +3,7 @@ import { factorial } from '../../controllers/algo/factorial';
 import { fibo } from '../../controllers/algo/fibonacci';
 import { pascalTriangle } from '../../controllers/algo/pascalTriangle';
 import { isPalindromeNumber } from '../../controllers/algo/palindromeNumber';
+import { reverseWords} from '../../controllers/algo/reverseWordsInString';
 
 export const algoRoute = express();
 
@@ -73,6 +74,26 @@ algoRoute.get('/palindrom-number/:number', (req: Request, res: Response) => {
         }
 
         res.send(isPalindromeNumber(num));
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+//reverse words in string
+algoRoute.post('/reverse-words-in-string', (req: Request, res: Response) => {
+    try {
+        const arr: string[] = req.body;
+        if (!arr || arr.length === 0) {
+            res.status(400).send('Params s lacks');
+            return;
+        }
+
+        const result: string[] = [];
+        for (let s of arr) {
+            result.push(reverseWords(s));
+        }
+
+        res.send(result);
     } catch (err) {
         res.status(400).send(err);
     }

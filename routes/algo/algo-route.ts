@@ -4,6 +4,7 @@ import { fibo } from '../../controllers/algo/fibonacci';
 import { pascalTriangle } from '../../controllers/algo/pascalTriangle';
 import { isPalindromeNumber } from '../../controllers/algo/palindromeNumber';
 import { reverseWords} from '../../controllers/algo/reverseWordsInString';
+import { arraySign } from '../../controllers/algo/signOnProductOfArray';
 
 export const algoRoute = express();
 
@@ -91,6 +92,27 @@ algoRoute.post('/reverse-words-in-string', (req: Request, res: Response) => {
         const result: string[] = [];
         for (let s of arr) {
             result.push(reverseWords(s));
+        }
+
+        res.send(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+//sign-on product of an array
+algoRoute.post('/signon-product-array', (req: Request, res: Response) => {
+    try {
+        const arr: number[][] = req.body;
+        if (!arr || arr.length === 0) {
+            res.status(400).send('Param arr lacks');
+            return;
+        }
+
+        const result: number[] = [];
+        for (let nums of arr) {
+            const product = arraySign(nums);
+            result.push(product);
         }
 
         res.send(result);

@@ -130,7 +130,7 @@ algoRoute.post('/signon-product-array', (req: Request, res: Response) => {
 algoRoute.post('/convert-date', (req: Request, res: Response) => {
     try {
         const userDate: BasicType = req.body;
-        const regex = /([0-9]|1[0-2])\/([1-9]|[12][0-9])\/\d{4}/;
+        const regex = /([0-9]|1[0-2])\/([1-9]|[12][0-9]|3[01])\/\d{4}/;
 
         if (!userDate || userDate.value.length === 0) {   //add regex check
             res.status(400).send('Should send date');

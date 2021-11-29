@@ -5,8 +5,13 @@ import { pascalTriangle } from '../../controllers/algo/pascalTriangle';
 import { isPalindromeNumber } from '../../controllers/algo/palindromeNumber';
 import { reverseWords} from '../../controllers/algo/reverseWordsInString';
 import { arraySign } from '../../controllers/algo/signOnProductOfArray';
+import { formatDate } from '../../controllers/algo/convertDate';
 
 export const algoRoute = express();
+
+interface BasicType {
+    value: string;
+}
 
 //factorial
 algoRoute.get('/factorial/:number', (req: Request, res: Response) => {
@@ -116,6 +121,28 @@ algoRoute.post('/signon-product-array', (req: Request, res: Response) => {
         }
 
         res.send(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+//convert date
+algoRoute.post('/convert-date', (req: Request, res: Response) => {
+    try {
+        const userDate: BasicType = req.body;
+        const regex = /([0-9]|1[0-2])\/([1-9]|[12][0-9])\/\d{4}/;
+
+        if (!userDate || userDate.value.length === 0) {   //add regex check
+            res.status(400).send('Should send date');
+            return;
+        }
+
+        if (!regex.test(userDate.value)) {
+            res.status(400).send("Invalid format, should be m/d/yyyy");
+            return;
+        }
+
+        res.send(formatDate(userDate.value));
     } catch (err) {
         res.status(400).send(err);
     }

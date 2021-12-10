@@ -6,6 +6,7 @@ import { isPalindromeNumber } from '../../controllers/algo/palindromeNumber';
 import { reverseWords} from '../../controllers/algo/reverseWordsInString';
 import { arraySign } from '../../controllers/algo/signOnProductOfArray';
 import { formatDate } from '../../controllers/algo/convertDate';
+import { reverseVowels } from '../../controllers/algo/reverseVowelsOfString';
 
 export const algoRoute = express();
 
@@ -143,6 +144,25 @@ algoRoute.post('/convert-date', (req: Request, res: Response) => {
         }
 
         res.send(formatDate(userDate.value));
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+//revers only vowels in string
+algoRoute.post('/reverse-vowels', (req: Request, res: Response) => {
+    try {
+        const arr = req.body;
+
+        if (arr.length === 0) {
+            res.status(400).send('Please input data');
+            return;
+        }
+
+        const result: string[] = [];
+
+        arr.forEach(s => result.push(reverseVowels(s)));
+        res.json(result);
     } catch (err) {
         res.status(400).send(err);
     }
